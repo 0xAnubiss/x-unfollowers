@@ -1,69 +1,69 @@
 # X Unfollowers
 
-[English](README.md) · [Türkçe](README.tr.md)
+**Türkçe** · [English](README.en.md)
 
-Chrome / Edge extension for X (Twitter). It finds accounts **you follow that do not follow you back**, lists them, and unfollows **only the ones you select**, one account at a time, with a delay you set.
+Chrome / Edge eklentisi. X’te **seni takip etmeyenleri** bulur, listeler; **sadece senin işaretlediklerini** verdiğin saniye aralığıyla, birer birer takipten çıkarır.
 
-Nothing is sent to an external server. Everything runs in your browser with the x.com session you already have open.
+Veri hiçbir sunucuya gitmez. Her şey tarayıcıda, açık olan x.com oturumunla çalışır.
 
-## Features
+## Özellikler
 
-- Scan your following list and show who does not follow you back
-- Search, select all / none, or pick accounts by hand
-- Protect accounts with a star so they are never selected
-- Configurable delay (seconds per unfollow)
-- Optional random jitter (±20%) so the timing is not perfectly even
-- Stop at any time
-- Daily unfollow counter (local)
+- Takip listeni tarar, seni geri takip etmeyenleri gösterir
+- Arama, tümünü seç / hiçbiri, veya tek tek işaretleme
+- Yıldız ile koruma listesi; o hesaplar seçilmez
+- Ayarlanabilir aralık (saniye / kişi)
+- İsteğe bağlı rastgele sapma (±%20)
+- İstediğin an durdurma
+- Günlük çıkarım sayacı (yalnızca cihazında)
 
-## Install (Chrome or Edge)
+## Kurulum (Chrome veya Edge)
 
-1. Download this repo and unzip it, or clone it:
+1. Bu repoyu indirip aç veya klonla:
    ```bash
    git clone https://github.com/0xAnubiss/x-unfollowers.git
    ```
-2. Open `chrome://extensions` or `edge://extensions`
-3. Turn on **Developer mode**
-4. Click **Load unpacked**
-5. Select the `x-unfollowers` folder
-6. Log in to [x.com](https://x.com). A round button at the bottom-right opens the panel. You can also use the extension icon.
+2. `chrome://extensions` veya `edge://extensions` aç
+3. **Geliştirici modu**nu aç
+4. **Paketlenmemiş öğe yükle** / **Load unpacked**
+5. `x-unfollowers` klasörünü seç
+6. [x.com](https://x.com) hesabına giriş yap. Sağ alttaki yuvarlak düğme paneli açar. Eklenti simgesinden de açabilirsin.
 
-## Usage
+## Kullanım
 
-1. Stay logged in on x.com
-2. Open the panel → **Taramayı Başlat** (Start scan)
-3. Review the list. Leave unchecked anyone you want to keep. The star (☆) adds an account to the protect list
-4. Set **Aralık** (interval). **30 seconds or slower is recommended.** 60 seconds is safer
-5. Keep **rastgele sapma** (random jitter) on if you want the wait to vary slightly
-6. Click **Seçilenleri Çıkar** (Unfollow selected). Use **Durdur** (Stop) to cancel
+1. x.com açık ve girişli olsun
+2. Paneli aç → **Taramayı Başlat**
+3. Listeyi kontrol et. Tutmak istediklerini işaretleme. Yıldız (☆) koruma listesine ekler
+4. **Aralık**ı ayarla. **30 saniye ve üzeri önerilir.** 60 saniye daha güvenli
+5. **Rastgele sapma** açıksa bekleme süresi biraz oynar
+6. **Seçilenleri Çıkar**. Kesmek için **Durdur**
 
-If the first scan is empty or errors, open `https://x.com/following`, scroll a bit, then scan again. The extension is more reliable after X’s own following request is captured.
+İlk tarama boşsa veya hata verirse `https://x.com/following` sayfasını aç, biraz aşağı kaydır, taramayı tekrar başlat. X’in kendi isteği yakalanınca tarama daha sağlam çalışır.
 
-## Safety
+## Güvenlik
 
-X rate-limits bulk unfollows. To reduce the chance of a restriction:
+X toplu takipten çıkarmayı sınırlar. Kısıtlama riskini azaltmak için:
 
-- Use 30 seconds or more between accounts (60+ is safer)
-- Do not unfollow hundreds in a single sitting
-- Do not run other X automation in the same session
+- Hesaplar arasında 30 saniye veya daha fazla bekle (60+ daha güvenli)
+- Bir oturumda yüzlerce kişiyi peş peşe çıkarma
+- Aynı oturumda başka X otomasyonu çalıştırma
 
-This is not X’s official API. If the site changes, the extension can break until it is updated. Use at your own risk.
+Bu eklenti X’in resmi API’si değildir. Site değişirse bozulabilir. Kendi hesabında, kendi sorumluluğunda kullan.
 
-## How it works
+## Nasıl çalışır
 
-The extension runs on `x.com` / `twitter.com` as a Manifest V3 content script. It uses your existing logged-in session to read the following list, checks who follows you back, then calls X’s unfollow endpoint one selected account at a time.
+Eklenti `x.com` / `twitter.com` üzerinde Manifest V3 içerik betiği olarak çalışır. Açık oturumunla takip listeni okur, geri takip durumunu kontrol eder, seçtiğin hesapları verdiğin aralıkla teker teker takipten çıkarır.
 
-| File | Role |
+| Dosya | Görev |
 | --- | --- |
-| `page-bridge.js` | Captures session headers from X’s own requests |
-| `content.js` | Panel, scan, selection, delayed unfollow |
-| `popup.html` | Toolbar popup |
-| `background.js` | Opens an X tab from the popup if needed |
+| `page-bridge.js` | X’in kendi isteklerinden oturum başlıklarını yakalar |
+| `content.js` | Panel, tarama, seçim, zamanlayıcılı çıkarma |
+| `popup.html` | Eklenti simgesi menüsü |
+| `background.js` | Popup’tan X sekmesi açar |
 
-## Language
+## Dil
 
-The GitHub docs are English and Turkish. The in-page panel is currently Turkish.
+Varsayılan GitHub belgesi Türkçe. İngilizce sürüm: [README.en.md](README.en.md). Sayfa içi panel Türkçe.
 
-## License
+## Lisans
 
-Use it on your own account, at your own risk.
+Kendi hesabında, kendi sorumluluğunda kullan.
